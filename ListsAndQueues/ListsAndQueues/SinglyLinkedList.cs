@@ -17,7 +17,7 @@ namespace ListsAndQueues
             // Insert a node before the second node (after the first node)
 
             LinkedListNode<string> node = linked.Find("one");
-            linked.AddAfter(node, "inserted");
+            linked.AddAfter(node, newData);
 
             foreach (var value in linked)
             {
