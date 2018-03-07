@@ -6,22 +6,60 @@ using System.Threading.Tasks;
 
 namespace ListsAndQueues
 {
-    public class SinglyLinkedList
+    class SinglyLinkedList
     {
-        public void GetLinkedList(LinkedList<string> linked, string newData)
-        { 
-            linked.AddLast("one");
-            linked.AddLast("two");
-            linked.AddLast("three");
-
-            // Insert a node before the second node (after the first node)
-
-            LinkedListNode<string> node = linked.Find("one");
-            linked.AddAfter(node, newData);
-
-            foreach (var value in linked)
+        public class Node
+        {
+            public Node next = null;
+            public string data;
+        }
+        private Node root = null;
+        public Node First { get { return root; } }
+        public Node Last
+        {
+            get
             {
-                Console.WriteLine(value);
+                Node curr = root;
+                if (curr == null)
+                {
+                    return null;
+
+                }
+                while (curr.next != null)
+                {
+                    curr = curr.next;
+                }
+                return curr;
+            }
+        }
+        public void Append(string value)
+        {
+            Node n = new Node { data = value };
+            if (root == null)
+                root = n;
+            else
+                Last.next = n;
+        }
+        public void Delete(Node n)
+        {
+            if (root != null)
+            {
+                root = n.next;
+                n.next = null;
+            }
+            else
+            {
+                Node curr = root;
+                while (curr.next != null)
+                {
+                    if (curr.next == n)
+                    {
+                        curr.next = n.next;
+                        n.next = null;
+                        break;
+                    }
+                    curr = curr.next;
+                }
             }
         }
     }
