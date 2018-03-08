@@ -8,59 +8,41 @@ namespace ListsAndQueues
 {
     class SinglyLinkedList
     {
+        public Node First { get; set; }
+        public Node Last { get; set; }
+
+        public void AddToLinkedList(string value)
+        {
+            Node node = new Node();
+            node.Value = value;
+
+            if (First == null)
+            {
+                First = node;
+                Last = node;
+            }
+            else
+            {
+                Last.Next = node;
+                Last = node;
+            }
+        }
+        public void DisplayAllItems()
+        {
+            Node current = First;
+            Console.WriteLine("List: ");
+            while (current != null)
+            {
+                Console.WriteLine(current.Value);
+                current = current.Next;
+            }
+        }
+
         public class Node
         {
-            public Node next = null;
-            public string data;
-        }
-        private Node root = null;
-        public Node First { get { return root; } }
-        public Node Last
-        {
-            get
-            {
-                Node curr = root;
-                if (curr == null)
-                {
-                    return null;
+            public string Value { get; set; }
+            public Node Next { get; set; }
 
-                }
-                while (curr.next != null)
-                {
-                    curr = curr.next;
-                }
-                return curr;
-            }
-        }
-        public void Append(string value)
-        {
-            Node n = new Node { data = value };
-            if (root == null)
-                root = n;
-            else
-                Last.next = n;
-        }
-        public void Delete(Node n)
-        {
-            if (root != null)
-            {
-                root = n.next;
-                n.next = null;
-            }
-            else
-            {
-                Node curr = root;
-                while (curr.next != null)
-                {
-                    if (curr.next == n)
-                    {
-                        curr.next = n.next;
-                        n.next = null;
-                        break;
-                    }
-                    curr = curr.next;
-                }
-            }
         }
     }
 }
